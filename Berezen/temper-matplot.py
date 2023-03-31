@@ -8,8 +8,8 @@ with open('temperature_data.csv', 'r') as csvfile:
     dates = []
     for row in data:
         # temperatures.append(str(row[30]))
-        temperatures.append(row[31])
-        dates.append(row[0])
+        temperatures.append(row[11])
+        dates.append(row[2])
 plt.plot(dates, temperatures)
 plt.title("Температура за місяць")
 plt.xlabel("Дата")
