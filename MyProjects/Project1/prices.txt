@@ -1,0 +1,12 @@
+prices = {
+    'Яйця': '',
+    'Хліб український': 'one_img.jpg',
+    'Хліб бородинський': 'two_img.jpg',
+    'Хліб фінський': 'three_img.jpg',
+    'Міні-круасани': 'four_img.jpg',
+    'Кока-кола': 'five_img.jpg',
+    'Цукор': 'six_img.jpg',
+    'Сіль': 'seven_img.jpg',
+    'Шоколад': 'eight_img.jpg',
+    'Молоко': 'nine_img.jpg'
+}

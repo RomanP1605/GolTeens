@@ -6,7 +6,7 @@ pygame.mixer.music.play(-1)
 
 screen=pygame.display.set_mode((600,400))
 pygame.display.set_caption('my game')
-img=pygame.image.load('../Berezen/icon2.png')
+img=pygame.image.load('icon2.png')
 pygame.display.set_icon(img)
 
 Black=(0,0,0)
