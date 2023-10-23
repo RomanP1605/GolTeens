@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import sqlite3
 import flask_wtf
 import wtforms
+import datetime
 
 
 class BestPizza(flask_wtf.FlaskForm):
@@ -16,7 +17,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '1234'
 
 
-
 @app.route('/')
 def main():
     return render_template('main_pizza.html', title='Veterano Pizza')
@@ -25,7 +25,7 @@ def main():
 connect = sqlite3.connect('database.db')
 connect.execute('CREATE TABLE IF NOT EXISTS PARTICIPANTS (pizza TEXT, count TEXT)')
 connect.execute('CREATE TABLE IF NOT EXISTS MENU (pizza_name TEXT, about TEXT, price INTEGER)')
-connect.execute('CREATE TABLE IF NOT EXISTS NEWS (main TEXT, about TEXT)')
+connect.execute('CREATE TABLE IF NOT EXISTS NEWS (main TEXT, about TEXT, time TEXT)')
 
 
 @app.route('/menu')
@@ -41,7 +41,7 @@ def menu():
             cursor = users.cursor()
             cursor.execute('INSERT INTO PARTICIPANTS (pizza, count) VALUES (?,?)', (pizza, count))
             users.commit()
-            return render_template('main_pizza.html')
+            return render_template('menu.html')
     else:
         return render_template('menu.html', data=data)
 
@@ -106,6 +106,15 @@ def vote():
 @app.route('/poll')
 def thank():
     return render_template("thankyou.html")
+
+
+@app.route('/news')
+def news():
+    connect = sqlite3.connect('database.db')
+    cursor = connect.cursor()
+    cursor.execute('SELECT * FROM NEWS')
+    data = cursor.fetchall()
+    return render_template('news.html', data=data)
 
 
 if __name__ == '__main__':

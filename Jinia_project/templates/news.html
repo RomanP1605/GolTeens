@@ -3,8 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+    </style>
 </head>
 <body>
+{% extends "main_pizza.html" %}
+    {% block content %}
+    <img src="https://images.vexels.com/media/users/3/128435/isolated/preview/3bba8cf18c7b31717c98231e7d6e736e-italian-pizza-logo.png" alt="Логотип">
+        <table style="width:100%">
+            <tr>
+              <th style="width: 200px">Назва акції або новини</th>
+              <th>Про акцію або новину</th>
+                <th style="width:100px">Час створення поста</th>
 
+            </tr>
+            {% for participant in data %}
+               <tr>
+                 <td>{{news[0]}}</td>
+                 <td>{{news[1]}}</td>
+                   <td>{{news[2]}}</td>
+                </tr>
+            {% endfor %}
+          </table>
+{% endblock %}
 </body>
 </html>

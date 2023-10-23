@@ -6,7 +6,7 @@
 </head>
 <body>
 <nav>
-{% for menu_item in ["main", "menu", "vote", "admin"] %}
+{% for menu_item in ["main", "menu", "vote", "admin", "news"] %}
   <a href="{{ url_for(menu_item) }}">{{ menu_item.upper() }}</a>
 {% endfor %}
 </nav>
