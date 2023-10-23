@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vote</title>
+</head>
+<body>
+<form action="vote" method="post">
+{% include "_navigation.html" %}
+{% block content %}
+{{ form.best_pizza.label }}
+{{ form.best_pizza }}
+{{ form.rating.label }}
+{{ form.rating }}<br>
+{{ form.feedback.label }}
+{{ form.feedback }}<br>
+{{ form.submit }}
+    {% endblock content %}
+</form>
+</body>
+</html>

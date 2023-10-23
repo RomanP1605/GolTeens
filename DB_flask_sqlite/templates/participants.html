@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Flask and SQLite </title>
+    </head>
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+        </style>
+    <body>
+        <table style="width:100%">
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>City</th>
+              <th>Country</th>
+              <th>Phone Number</th>
+            </tr>
+            {%for participant in data%}
+               <tr>
+                 <td>{{participant[0]}}</td>
+                 <td>{{participant[1]}}</td>
+                 <td>{{participant[2]}}</td>
+                 <td>{{participant[3]}}</td>
+                 <td>{{participant[4]}}</td>
+                </tr>
+            {%endfor%}
+          </table>
+    </body>
+</html>

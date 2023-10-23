@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<nav>
+{% for menu_item in ["index", "results", "contacts"] %}
+  <a href="{{ url_for(menu_item) }}">{{ menu_item.upper() }}</a>
+{% endfor %}
+</nav>
+</body>
+</html>

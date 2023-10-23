@@ -1,0 +1,1 @@
+open_weather_token='f4e0ae6da5566b0a269e6c7ced02188f'

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+<hr>
+<h2>Список публікацій</h2>
+<ul class="list-posts">
+    {% for p in posts %}
+    <li>
+        <p class = 'title'><a href="{{ url_for('showPost', id_post=p.id)}}">{{p.title}}</a></p>
+        <p class="annonce">{{p.text[:50]}}</p>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+</body>
+</html>

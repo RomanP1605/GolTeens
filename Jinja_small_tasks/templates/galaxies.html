@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for g in nearby_galaxies.values() %}
+{{g['distance_trillionkm']|round|int}}<br>
+{{g['description']|truncate(length=10, end='')}}<br>
+{% endfor %}
+Suma {{nearby_galaxies.values()|sum(attribute='distance_ly')}}<br>
+Nearby galaxy {{(nearby_galaxies.values()|min(attribute='distance_trillionkm'))['distance_trillionkm']}}
+{{(nearby_galaxies.values()|min(attribute='distance_trillionkm'))['galaxy']}}
+</body>
+</html>

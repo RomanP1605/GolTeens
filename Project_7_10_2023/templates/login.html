@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+{{ super() }}
+{% for cat,msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="/login" method="post" class="form-contact">
+<p><label>  Ім'я  </label><input type="text" name="name" value="" required></p>
+<p><label>  Email  </label><input type="email" name="email" value="" required></p>
+    <p><label> Пароль </label><input type="password" name="psw" value="" required></p>
+    <p><label>  Повтор паролю  </label><input type="password" name="psw2" value="" required></p>
+<p> <input type="checkbox" name="remainme"  /> Запам'ятати мене
+    <p><input type="submit" value="Увійти" />
+    <p> <a href="{{url_for('register')}}"> Реєстpація </a>
+</form>
+{% endblock %}
+</body>
+</html>

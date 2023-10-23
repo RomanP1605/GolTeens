@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<ul>
+    {% for u in list %}
+    <li><p>id: {{ u.id }}, email: {{ u.email }}</p>
+    <ul>
+        <li> Ім'я: {{u.pr.name}}</li>
+        <li> Вік: {{u.pr.old}}</li>
+        <li> Місто: {{u.pr.city}}</li>
+    </ul>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+</body>
+</html>

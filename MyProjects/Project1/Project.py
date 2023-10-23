@@ -6,11 +6,13 @@ import datetime
 bot = telebot.TeleBot("6198567091:AAG07gB3O0IBKznT4MyEluKnbHIyuC1TSnI")
 open_weather_token = 'f4e0ae6da5566b0a269e6c7ced02188f'
 
+
 def get_weather(city):
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={open_weather_token}&units=metric'
     response = requests.get(url)
     data = response.json()
     return data
+
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -23,14 +25,12 @@ def send_welcome(message):
 
     bot.send_message(chat_id, "Привіт! Я бот. Що ви б хотіли дізнатися?", reply_markup=keyboard)
 
+
 @bot.message_handler(func=lambda message: message.text == "Ціна на продукти")
 def send_products_price(message):
     chat_id = message.chat.id
-    keyboard = types.ReplyKeyboardMarkup(row_width=1)
-    button = types.KeyboardButton('Відмінити')
-    keyboard.add(button)
+    bot.send_message(chat_id, "Напишіть назву продукту")
 
-    bot.send_message(chat_id, "Напишіть назву продукту", reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
@@ -80,15 +80,22 @@ def echo_message(message):
             f" Схід сонця: {sunrise}\n Захід: {sunset}\n"
             f" Гарного дня!"
         )
+        if weather_description == 'Clear':
+            bot.send_photo(message.chat.id,
+                           'https://aspi.com.ua/sites/default/files/styles/746x/public/2019-08/nastol.com_.ua-205880.jpg?itok=QZvrRR6I')
+        elif weather_description == 'Rain':
+            bot.send_photo(message.chat.id,
+                           'https://images.unian.net/photos/2017_06/thumb_files/400_0_1497168235-4518.jpg?0.7153773501581622')
+        elif weather_description == 'Clouds':
+            bot.send_photo(message.chat.id,
+                           'https://dubno.rayon.in.ua/storage/cache/images/upload/news/26/1614367061293/700x371-t_1_21338fcc-1e78-467a-b10d-bc1fdfe94695.webp')
     elif message.text.lower() == "новини":
-        with open('news.txt', 'r') as n:
-            news = n.read()
-        bot.send_message(message.chat.id, news)
+        print(1)
     else:
         bot.send_message(chat_id, "Я не розумію, про що ви говорите")
 
 
-@bot.message_handler(func=lambda message: message.text == "Відмінити")
+@bot.message_handler(func=lambda message: message.text == "Повернутись в головне меню")
 def cancel_message(message):
     chat_id = message.chat.id
 
@@ -99,5 +106,6 @@ def cancel_message(message):
     keyboard.add(button1, button2, button3)
 
     bot.send_message(chat_id, "Що ви б хотіли дізнатися?", reply_markup=keyboard)
+
 
 bot.polling()

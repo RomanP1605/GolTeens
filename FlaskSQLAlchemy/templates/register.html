@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+{% for cat,msg in get_flashed_messages(True) %}
+<div class="flash {{cat}}">{{msg}}</div>
+{% endfor %}
+<form action="" method="post" class="form-contact">
+  <p><label> Ім'я: </label><input type="text" name="name" value="" required />
+  <p><label> Вік: </label><input type="text" name="old" value="" required />
+  <p><label> Місто: </label><input type="text" name="city" value="" required />
+  <p><label> Пошта: </label><input type="text" name="email" value="" required />
+  <p><label> Пароль: </label><input type="text" name="psw" value="" required />
+  <p><label> Повтор паролю: </label><input type="password" name="psw2" value="" required />
+    <p><input type="submit" value="Підтвердити">
+</form>
+{% endblock %}
+</body>
+</html>

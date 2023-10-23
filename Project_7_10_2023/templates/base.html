@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% block title %}
+{% if title %}
+<title> Про школу - {{title}} </title>
+{% else %}
+<title> Про школу </title>
+{% endif %}
+{% endblock %}
+</head>
+
+<body>
+{% block content %}
+{% block mainmenu %}
+<ul class="mainmenu">
+{% for m in menu %}
+<li><a href="{{m.url}}">{{m.title}}</a></li>
+{% endfor %}
+</ul>
+{% endblock mainmenu %}
+<div class="clear"></div>
+<div class="content">
+{% if title %}
+<h1>{{title}}</h1>
+{% else %}
+<h1>Про школу</h1>
+{% endif %}
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% import "macros.html" as macros %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Veterano Pizza</title>
+    <link rel="stylesheet" href="/static/pizza.css">
+</head>
+<body>
+<header>
+    {% include "_navigation.html" %}
+</header>
+{% block content %}
+<logo><img src="https://images.vexels.com/media/users/3/128435/isolated/preview/3bba8cf18c7b31717c98231e7d6e736e-italian-pizza-logo.png"></logo>
+<h1>Головна сторінка</h1>
+{% endblock content %}
+<footer>
+    {{ macros.light_or_dark_mode("body") }}
+</footer>
+</body>
+</html>

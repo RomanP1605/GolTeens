@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% macro light_or_dark_mode(element) %}
+{% if request.args.get('mode') == "dark" %}
+<a href="{{ request.path }}">Switch to Light Mode</a>
+<style>
+  {{ element }} {
+  background-color: #212F3C;
+  color: #FF0000;
+  }
+  {{ element }} a {
+  color: #00BFFF !important
+  }
+</style>
+{% else %}
+<a href="{{ request.path }}?mode=dark">Switch to Dark Mode</a>
+{% endif %}
+{% endmacro %}
+
+{% macro add_badge(student, students) %}
+{% set high_score = students|map(attribute="score")|max %}
+{% if student.score == high_score %}👑
+{% elif student.score > 80 %}🙂
+{% else %}🙁
+{% endif %}
+{% endmacro %}
+</body>
+</html>

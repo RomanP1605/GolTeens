@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{test_name}} {{title}}</h1>
+<ul>
+    {% for student in students|sort(attribute="score", reverse=True) %}
+    <li>
+        {{ macros.add_badge(student, students) }}
+        <em> {{student.name}}: </em>
+        {{student.score}}/{{max_score}}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock content %}
+</body>
+</html>
