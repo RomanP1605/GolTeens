@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+{% extends "base.html" %}
+{% block main %}
+<main class="container mt-3">
+  <section class="jumbotron text-center mt-4" style="background: url('https://place-hold.it/1600x300');
+backgrounds-position: center">
+    <h1 class="display-4">Тури автобусом</h1>
+    <p class="lead">{{subtitle}}</p>
+    <p class="mt-0 w-10 mx-auto">{{description}}</p>
+  </section>
+  <div class="row mt-5">
+    {% for id in range(1,7) %}
+    <div class="col-4">
+      <div class="card mb-4">
+        <div class="embed-responsive embed-responsive-16by-9">
+          <img class="card-img-top embed-responsive-item" src="{{ tours[id]['picture'] }}" alt="" />
+        </div>
+        <div class="card-body">
+          <h2 class="h5 card-title">{{tours[id]["title"]}}</h2>
+          <p class="card-text">{{tours[id]["description"]|truncate(130)}}</p>
+          <a href="/tours/{{id}}/" class="btn-sm btn-primary">Деталі туру</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}
+  </body>
+</html>

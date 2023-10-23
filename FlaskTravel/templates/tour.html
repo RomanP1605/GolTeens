@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Flask Travel</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+{% extends "base.html" %}
+{% set from = departures[departure] %}
+{% block main %}
+<main class="container">
+  <section class="mt-3 pb-5">
+    <h1 class="display-3 mt-4">{{tour.title}}{{tour.stars|int * "*"}}</h1>
+    <p class="lead">{{tour.country}}{{from}} на {{tour.nights}} ночей</p>
+    <img src={{tour.picture}} class="w-75" alt="">
+    <p class="my-4 w-75">{{tour.description}}</p>
+    <a href="javascript:alert('Мрії збуваються')" class="btn btn-success btn-lg">Купити тур за {{tour.price}} грн</a>
+  </section>
+</main>
+{% endblock %}
+  </body>
+</html>

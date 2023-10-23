@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% set from = departures[departure]%}
+{% set sorted_by_price = tours.values()|sort(attribute="price") %}
+{% set sorted_by_nights = tours.values()|sort(attribute="nights") %}
+
+{% block main %}
+
+  <main class="container mt-3">
+    <h1 class="display-5 mt-4">Вирушаємо {{from}}</h1>
+    <p class="mb-4">Знайдено {{ tours|length }} турів від {{ (sorted_by_price|first).price }} грн. до {{ (sorted_by_price|last).price }} грн.
+    </p>
+    <!-- CARDS -->
+    <div class="row mt-5">
+      {% for id, tour in tours.items() %}
+      <div class="col-4">
+        <div class="card mb-4">
+          <div class="embed-responsive embed-responsive-16by9">
+          <img src={{tour.picture}} class="card-img-top img-fluid" alt="">
+          </div>
+          <div class="card-body">
+            <h2 class="h5 card-title">{{ tour.title }}</h2>
+            <p class="card-text"> {{ tour.description|truncate(130) }}</p>
+            <a href="/tours/{{ id }}" class="btn btn-sm btn-primary">Деталі туру</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </main>
+{% endblock %}
