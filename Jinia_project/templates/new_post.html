@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Додавання нового поста</title>
+</head>
+<body>
+{% extends "main_pizza.html" %}
+    {% block content %}
+    <img src="https://images.vexels.com/media/users/3/128435/isolated/preview/3bba8cf18c7b31717c98231e7d6e736e-italian-pizza-logo.png" alt="Логотип">
+<form action="/new_post" method="post">
+        <label>Введіть назву акції або новини</label>
+        <input type="name" name="main" placeholder="Назва" required><br/>
+        <label>Опис</label>
+        <input type="name" name="about_post" placeholder="Опис" required><br/>
+        <input type="submit" value="Додати пост"/><br/>
+    </form>
+    {% endblock content %}
+</body>
+</html>

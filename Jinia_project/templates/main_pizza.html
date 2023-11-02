@@ -5,16 +5,33 @@
     <meta charset="UTF-8">
     <title>Veterano Pizza</title>
     <link rel="stylesheet" href="/static/pizza.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
 <header>
-    {% include "_navigation.html" %}
+    <a href="/" class="btn btn-dark">Main menu</a>
+    <a href="/menu" class="btn btn-dark">Menu</a>
+    <a href="/vote" class="btn btn-dark">Vote</a>
+    <a href="/news" class="btn btn-dark">News</a>
+    <a href="/admin" class="btn btn-danger">Admin Only</a>
+
 </header>
 {% block content %}
 <logo><img src="https://images.vexels.com/media/users/3/128435/isolated/preview/3bba8cf18c7b31717c98231e7d6e736e-italian-pizza-logo.png"></logo>
 <h1>Головна сторінка</h1>
+Veterano Pizza - це місце, де справжня майстерність зустрічається зі смаком! Наша піцерія втілює давню італійську традицію в готуванні смачних піц, яка переплітається зі сміливими експериментами із смаками.
+<p>Ми - справжні ветерани смаку, які знають, як робити ідеальну піцу. У нашій атмосфері ви відчуєте тепло і гостинність, які допомагають вам розслабитися та насолоджуватися нашими стравами.
+<p>Ми використовуємо найсвіжіші інгредієнти та найкращі секрети кулінарного мистецтва для створення справжніх шедеврів.
+    У нас ви знайдете різноманітні варіації піци, які задовольнять навіть найвибагливіших гурманів. Від класичних до авторських рецептів, ми пропонуємо вам смакові подорожі, які ви запам'ятаєте надовго.
+
+<p>Нехай ваше перебування у Veterano Pizza буде справжнім кулінарним приголомшенням, яке заслуговуєте. Долайте до нас і насолоджуйтеся справжньою піцею, приготованою з любов'ю та професіоналізмом!
+
 {% endblock content %}
 <footer>
+    <h4>-----</h4>
+    Зв'язатися з нами :
+    <p>Viber: +380684145544
+        <p>Telegram: +380684145544 або @Roman_068</p>
     {{ macros.light_or_dark_mode("body") }}
 </footer>
 </body>

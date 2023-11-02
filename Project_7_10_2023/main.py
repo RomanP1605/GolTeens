@@ -2,7 +2,9 @@ import sqlite3
 import os
 from flask import Flask, render_template, request, g, flash, redirect, url_for
 from FDataBase import FDataBase
+from UserLogin import UserLogin
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import LoginManager, login_user, login_required, current_user, logout_user
 
 DATABASE = '/tmp/main_app.db'
 DEBUG = True
@@ -11,6 +13,12 @@ SECRET_KEY = '5544'
 app = Flask(__name__)
 app.config.from_object(__name__)
 app.config.update(dict(DATABASE=os.path.join(app.root_path, 'main_app.db')))
+login_manager = LoginManager(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    print('load_user')
+    return UserLogin().fromDB(user_id, dbase)
 
 
 def connect_db():
@@ -74,6 +82,7 @@ def addPost():
 
 
 @app.route("/post/<int:id_post>")
+@login_required
 def showPost(id_post):
     # db=get_db()
     # dbase=FDataBase(db)
@@ -83,8 +92,15 @@ def showPost(id_post):
     return render_template('post.html', menu=dbase.getMenu(), title=title, post=post)
 
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
+    if request.method == 'POST':
+        user = dbase.getUserByEmail(request.form['email'])
+        if user and check_password_hash(user['psw'],request.form['psw']):
+            userLogin=UserLogin().create(user)
+            login_user(userLogin)
+            return redirect(url_for('index'))
+        flash('Неправильна пара логін-пароль','error')
     return render_template('login.html', menu=dbase.getMenu(), title='Авторизація')
 
 
@@ -104,6 +120,19 @@ def register():
             flash('Неправильно заповнені поля', 'error')
 
     return render_template("register.html", menu=dbase.getMenu(), title="Реєстрація")
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash('Ви вийшли з аккаунта', 'success')
+    return redirect(url_for('login'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    return f"""<p><a href="{url_for('logout')}">Вийти з профілю</a>
+               <p> user info:{current_user.get_id()}"""
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@
 </head>
 <body>
 <form action="/poll" method="post">
-{% include "_navigation.html" %}
+{% extends 'main_pizza.html' %}
 {% block content %}
 {{ form.best_pizza.label }}
 {{ form.best_pizza }}

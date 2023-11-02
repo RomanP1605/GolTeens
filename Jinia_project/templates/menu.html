@@ -12,6 +12,7 @@
     {% extends "main_pizza.html" %}
     {% block content %}
     <img src="https://images.vexels.com/media/users/3/128435/isolated/preview/3bba8cf18c7b31717c98231e7d6e736e-italian-pizza-logo.png" alt="Логотип">
+    <h2>Тут оберіть піцу яку хочете замовити</h2>
         <table style="width:100%">
             <tr>
               <th>Назва піци</th>
@@ -27,11 +28,12 @@
             {% endfor %}
           </table>
     <form action="/menu" method="post">
+        <h2>Тут можете замовити піцу</h2>
   <label>Введіть назву піци:</label>
   <input type="name" name="pizza" placeholder="Назва піци" required><br/>
   <label>Кількість:</label>
   <input type="name" name="count" placeholder="Кількість" required><br/>
-    <input type="submit" value="submit"/><br/>
+    <input type="submit" value="Замовити"/><br/>
 </form>
     {% endblock content %}
     </body>

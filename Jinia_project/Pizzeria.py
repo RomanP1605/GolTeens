@@ -5,7 +5,6 @@ import flask_wtf
 import wtforms
 import datetime
 
-
 class BestPizza(flask_wtf.FlaskForm):
     best_pizza = wtforms.RadioField('Which pizza did you like the most?')
     rating = wtforms.IntegerField('Rate our pizzeria on a 10-point scale')
@@ -28,7 +27,7 @@ connect.execute('CREATE TABLE IF NOT EXISTS MENU (pizza_name TEXT, about TEXT, p
 connect.execute('CREATE TABLE IF NOT EXISTS NEWS (main TEXT, about TEXT, time TEXT)')
 
 
-@app.route('/menu')
+@app.route('/menu', methods=['POST', 'GET'])
 def menu():
     connect = sqlite3.connect('database.db')
     cursor = connect.cursor()
@@ -46,55 +45,52 @@ def menu():
         return render_template('menu.html', data=data)
 
 
-# @app.route('/redact')
-# def redact():
-#     if request.method == 'POST':
-#         pizza_name = request.form['pizza_name']
-#         about = request.form['about']
-#         price = request.form['price']
-#         with sqlite3.connect('database.db') as users:
-#             cursor = users.cursor()
-#             cursor.execute('INSERT INTO MENU (pizza_name, about, price) VALUES (?,?,?)', (pizza_name, about, price))
-#             users.commit()
-#             return render_template('redact.html')
-#     else:
-#         return render_template('main_pizza.html')
-
-
-# @app.route('/order', methods=['GET', 'POST'])
-# def order():
-#     if request.method == 'POST':
-#         pizza = request.form['pizza']
-#         count = request.form['count']
-#         with sqlite3.connect('database.db') as users:
-#             cursor = users.cursor()
-#             cursor.execute('INSERT INTO PARTICIPANTS (pizza, count) VALUES (?,?)', (pizza, count))
-#             users.commit()
-#             return render_template('main_pizza.html')
-#     else:
-#         return render_template('order_pizza.html')
-
-
-@app.route('/admin')
+@app.route('/admin', methods=['POST','GET'])
 def admin():
     connect = sqlite3.connect('database.db')
     cursor = connect.cursor()
     cursor.execute('SELECT * FROM PARTICIPANTS')
     data = cursor.fetchall()
     if request.method == 'POST':
+        # Add new pizza
         pizza_name = request.form['pizza_name']
         about = request.form['about']
         price = request.form['price']
+        # Add new post
+        main = request.form['main']
+        about_post = request.form['about_post']
+        time = datetime.datetime
+        print(time)
         with sqlite3.connect('database.db') as users:
             cursor = users.cursor()
             cursor.execute('INSERT INTO MENU (pizza_name, about, price) VALUES (?,?,?)', (pizza_name, about, price))
+            cursor.execute('INSERT INTO NEWS (main, about_post, time) VALUES (?,?,?)', (main, about_post, time))
             users.commit()
             return render_template('participants.html')
     else:
         return render_template('participants.html', data=data)
 
+@app.route('/new_post', methods=['POST', 'GET'])
+def new_post():
+    connect = sqlite3.connect('database.db')
+    cursor = connect.cursor()
+    data = cursor.fetchall()
+    if request.method == 'POST':
+        main = request.form['main']
+        about_post = request.form['about_post']
+        time = datetime.datetime
+        print(time)
+        with sqlite3.connect('database.db') as users:
+            cursor = users.cursor()
+            cursor.execute('INSERT INTO NEWS (main, about_post, time) VALUES (?,?,?)', (main, about_post, time))
+            users.commit()
+            return render_template('new_post.html')
+    else:
+        return render_template('new_post.html', data=data)
 
-@app.route('/vote')
+
+
+@app.route('/vote', methods=['POST', 'GET'])
 def vote():
     form = BestPizza()
     form.best_pizza.choices = [('Пеппероні', 'Пеппероні'), ('Маргарита', 'Маргарита')]
