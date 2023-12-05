@@ -7,7 +7,7 @@
 <body>
 {% macro light_or_dark_mode(element) %}
 {% if request.args.get('mode') == "dark" %}
-<a href="{{ request.path }}">Switch to Light Mode</a>
+<a href="{{ request.path }}">Перемкнутись на світлу тему</a>
 <style>
   {{ element }} {
   background-color: #212F3C;
@@ -18,7 +18,7 @@
   }
 </style>
 {% else %}
-<a href="{{ request.path }}?mode=dark">Switch to Dark Mode</a>
+<a href="{{ request.path }}?mode=dark">Перемкнутись на темну тему</a>
 {% endif %}
 {% endmacro %}
 </body>

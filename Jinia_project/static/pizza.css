@@ -2,5 +2,13 @@ h1 {
     text-align: center;
 }
 img {
-    width: 200px
+    width: 70px
+}
+h1, h2, h3, h4, p, navigation, th, td, label {
+    font-family: Bradley Hand, cursive;
+    font-size: 24px;
+}
+body {
+    background-image: url(https://cdn.pixabay.com/photo/2017/02/14/08/28/cutting-board-background-2065305_1280.jpg);
+    background-size: 1200px;
 }

@@ -3,7 +3,6 @@ from flask import Flask, render_template, request
 import sqlite3
 import flask_wtf
 import wtforms
-import datetime
 
 class BestPizza(flask_wtf.FlaskForm):
     best_pizza = wtforms.RadioField('Which pizza did you like the most?')
@@ -56,15 +55,9 @@ def admin():
         pizza_name = request.form['pizza_name']
         about = request.form['about']
         price = request.form['price']
-        # Add new post
-        main = request.form['main']
-        about_post = request.form['about_post']
-        time = datetime.datetime
-        print(time)
         with sqlite3.connect('database.db') as users:
             cursor = users.cursor()
             cursor.execute('INSERT INTO MENU (pizza_name, about, price) VALUES (?,?,?)', (pizza_name, about, price))
-            cursor.execute('INSERT INTO NEWS (main, about_post, time) VALUES (?,?,?)', (main, about_post, time))
             users.commit()
             return render_template('participants.html')
     else:
@@ -78,8 +71,7 @@ def new_post():
     if request.method == 'POST':
         main = request.form['main']
         about_post = request.form['about_post']
-        time = datetime.datetime
-        print(time)
+        time = request.form['time']
         with sqlite3.connect('database.db') as users:
             cursor = users.cursor()
             cursor.execute('INSERT INTO NEWS (main, about_post, time) VALUES (?,?,?)', (main, about_post, time))
@@ -99,7 +91,7 @@ def vote():
     return form.best_pizza.data
 
 
-@app.route('/poll')
+@app.route('/poll', methods=['POST', 'GET'])
 def thank():
     return render_template("thankyou.html")
 
